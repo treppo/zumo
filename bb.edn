@@ -2,6 +2,12 @@
  {dev {:doc "Run in development mode with REPL"
        :task (shell "clojure -M:dev")}
 
+  outdated {:doc "Run in development mode with REPL"
+            :task (shell "clojure -Sdeps '{:deps {com.github.liquidz/antq {:mvn/version \"2.11.1276\"}}}' -M -m antq.core")}
+
+  upgrade {:doc "Run in development mode with REPL"
+           :task (shell "clojure -Sdeps '{:deps {com.github.liquidz/antq {:mvn/version \"2.11.1276\"}}}' -M -m antq.core --upgrade")}
+
   run {:doc "Run the application"
        :task (shell {:extra-env {"PROFILE" "local"}} "clojure -M:run")
        :override-builtin true}
