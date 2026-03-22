@@ -1,0 +1,16 @@
+{:tasks
+ {dev {:doc "Run in development mode with REPL"
+       :task (shell "clojure -M:dev")}
+
+  run {:doc "Run the application"
+       :task (shell "clojure -M:run")
+       :override-builtin true}
+
+  uberjar {:doc "Build uberjar"
+           :task (shell "clojure -X:uberjar")
+           :override-builtin true}
+
+  clean {:doc "Clean build artifacts"
+         :task (do
+                 (fs/delete-tree "target")
+                 (fs/delete-tree ".cpcache"))}}}

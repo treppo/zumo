@@ -1,0 +1,4 @@
+[tools]
+babashka = "latest"
+clojure = "latest"
+java = "graalvm"

@@ -1,1 +1,8 @@
 .idea
+target/
+.cpcache/
+.nrepl-port
+*.jar
+.env
+.clj-kondo/
+.lsp/
