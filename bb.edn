@@ -7,7 +7,7 @@
        :override-builtin true}
 
   uberjar {:doc "Build uberjar"
-           :task (shell "clojure -X:uberjar")
+           :task (shell "./uberdeps/package.sh")
            :override-builtin true}
 
   clean {:doc "Clean build artifacts"
