@@ -3,7 +3,7 @@
        :task (shell "clojure -M:dev")}
 
   run {:doc "Run the application"
-       :task (shell "clojure -M:run")
+       :task (shell {:extra-env {"PROFILE" "local"}} "clojure -M:run")
        :override-builtin true}
 
   uberjar {:doc "Build uberjar"

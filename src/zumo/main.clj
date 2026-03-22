@@ -1,9 +1,8 @@
-(ns zumo.core
+(ns zumo.main
   (:require [integrant.core :as ig]
             [zumo.system :as system])
   (:gen-class))
 
 (defn -main [& _args]
-  (println "Starting Zumo...")
-  (-> (system/system)
+  (-> (system/components)
       (ig/init)))

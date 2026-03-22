@@ -1,3 +1,2 @@
 {:port #profile {:local 8080
-                 :production 80}
- :database-url #profile {:local "jdbc:postgresql://localhost:5432/zumo"}}
+                 :production 80}}
