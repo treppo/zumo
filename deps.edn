@@ -1,13 +1,13 @@
 {:paths ["src" "resources"]
 
- :deps {org.clojure/clojure {:mvn/version "1.12.4"}
+ :deps {org.clojure/clojure {:mvn/version "1.12.5"}
 
         ;; Spec
         org.clojure/spec-alpha2 {:git/url "https://github.com/clojure/spec-alpha2.git"
                                  :git/sha "efbeb200b9594e265907c1d66ad4ffd9cd8c91cf"}
 
         ;; Web
-        ring/ring-core {:mvn/version "1.15.3"}
+        ring/ring-core {:mvn/version "1.15.4"}
         http-kit/http-kit {:mvn/version "2.8.1"}
         metosin/reitit {:mvn/version "0.10.1"}
         metosin/reitit-ring {:mvn/version "0.10.1"}
@@ -40,6 +40,6 @@
         io.github.tonsky/clojure-plus {:mvn/version "1.7.2"}}
 
  :aliases
- {:dev {:extra-deps {integrant/repl {:mvn/version "0.5.0"}}}
+ {:dev {:extra-deps {integrant/repl {:mvn/version "0.5.1"}}}
 
   :run {:main-opts ["-m" "zumo.main"]}}}
