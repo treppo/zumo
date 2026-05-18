@@ -2,3 +2,4 @@
 babashka = "latest"
 clojure = "latest"
 java = "graalvm"
+"cargo:zerostack" = { version = "latest", features = "acp,loop,git-worktree,mcp" }
