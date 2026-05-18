@@ -19,4 +19,7 @@
   clean {:doc "Clean build artifacts"
          :task (do
                  (fs/delete-tree "target")
-                 (fs/delete-tree ".cpcache"))}}}
+                 (fs/delete-tree ".cpcache"))}
+
+  agent {:doc "Run coding agent"
+         :task (shell "zerostack --provider openrouter --model deepseek/deepseek-v4-flash")}}}
