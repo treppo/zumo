@@ -12,6 +12,10 @@
        :task (shell {:extra-env {"PROFILE" "local"}} "clojure -M:run")
        :override-builtin true}
 
+  test {:doc "Run the tests"
+        :task (shell {:extra-env {"PROFILE" "test"}} "clojure -X:test")
+        :override-builtin true}
+
   uberjar {:doc "Build uberjar"
            :task (shell "./uberdeps/package.sh")
            :override-builtin true}

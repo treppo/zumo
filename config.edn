@@ -1,2 +1,3 @@
 {:port #profile {:local 8080
-                 :production 80}}
+                 :production 80
+                 :test 56789}}
