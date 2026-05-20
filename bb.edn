@@ -25,5 +25,9 @@
            :task (shell "clojure -T:build uberjar")
            :override-builtin true}
 
+  native-image {:doc "Build a GraalVM native binary from the uberjar"
+                :task (shell "clojure -T:build native-image")
+                :override-builtin true}
+
   agent {:doc "Run coding agent"
          :task (shell "zerostack --provider openrouter --model deepseek/deepseek-v4-flash")}}}

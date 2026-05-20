@@ -17,3 +17,23 @@
            :uber-file uber-file
            :basis basis
            :main 'zumo.main}))
+
+(defn native-image [_]
+  (println "› Step 1: Build uberjar ...")
+  (uberjar nil)
+  (println "\n› Step 2: Build native image ...")
+  (let [{:keys [exit out err]} (b/process {:command-args ["native-image"
+                                                          "-jar" uber-file
+                                                          "-o target/zumo"
+                                                          "--no-fallback"
+                                                          "--initialize-at-build-time"
+                                                          "--enable-url-protocols=http,https"
+                                                          "-H:+ReportExceptionStackTraces"
+                                                          "-march=native"
+                                                          "--verbose"]})]
+    (println out)
+    (when (seq err) (println err))
+    (println (if (zero? exit)
+               "\n✓ Native image created at target/zumo"
+               (str "\n✗ Native image build failed with exit code " exit)))
+    (System/exit exit)))
