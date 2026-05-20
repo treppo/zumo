@@ -16,14 +16,14 @@
         :task (shell {:extra-env {"PROFILE" "test"}} "clojure -X:test")
         :override-builtin true}
 
-  uberjar {:doc "Build uberjar"
-           :task (shell "./uberdeps/package.sh")
-           :override-builtin true}
-
   clean {:doc "Clean build artifacts"
          :task (do
                  (fs/delete-tree "target")
                  (fs/delete-tree ".cpcache"))}
+
+  uberjar {:doc "Build an uberjar (standalone JAR)"
+           :task (shell "clojure -T:build uberjar")
+           :override-builtin true}
 
   agent {:doc "Run coding agent"
          :task (shell "zerostack --provider openrouter --model deepseek/deepseek-v4-flash")}}}
