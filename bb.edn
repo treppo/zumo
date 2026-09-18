@@ -22,6 +22,7 @@
 
   test {:doc "Run the tests"
         :task (shell {:extra-env {"PROFILE" "test"}} "clojure -X:test")
+        :depends [fmt-check]
         :override-builtin true}
 
   clean {:doc "Clean build artifacts"
