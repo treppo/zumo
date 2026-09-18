@@ -1,4 +1,6 @@
-{:tasks
+{:deps {dev.weavejester/cljfmt {:mvn/version "0.13.1"}}
+
+ :tasks
  {dev {:doc "Run in development mode with REPL"
        :task (shell "clojure -M:dev")}
 
@@ -11,6 +13,12 @@
   run {:doc "Run the application"
        :task (shell {:extra-env {"PROFILE" "local"}} "clojure -M:run")
        :override-builtin true}
+
+  fmt {:doc "Format Clojure source files with cljfmt"
+       :task (shell "bb -f script/cljfmt.clj fix")}
+
+  fmt-check {:doc "Check Clojure source formatting with cljfmt"
+             :task (shell "bb -f script/cljfmt.clj check")}
 
   test {:doc "Run the tests"
         :task (shell {:extra-env {"PROFILE" "test"}} "clojure -X:test")
