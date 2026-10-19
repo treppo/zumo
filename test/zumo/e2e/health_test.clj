@@ -29,7 +29,7 @@
         true
         (if (< (- (System/currentTimeMillis) start) timeout-ms)
           (do (Thread/sleep 10)
-              (recur))
+            (recur))
           (throw (RuntimeException. (str "Server did not start within " timeout-ms "ms"))))))))
 
 (deftest application-starts-successfully

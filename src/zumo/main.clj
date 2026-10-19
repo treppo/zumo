@@ -5,7 +5,7 @@
 
 (defn -main [& _args]
   (-> (system/components)
-      (integrant/init)))
+    (integrant/init)))
 
 (defn halt [system]
   (integrant/halt! system))

@@ -12,15 +12,15 @@
 
 (defn- router []
   (ring/router
-   (routes)
-   {:data {:middleware [parameters/parameters-middleware]}}))
+    (routes)
+    {:data {:middleware [parameters/parameters-middleware]}}))
 
 (defn- handler []
   (ring/ring-handler
-   (router)
-   (ring/routes
-    (ring/create-default-handler
-     {:not-found (constantly (views/not-found))}))))
+    (router)
+    (ring/routes
+      (ring/create-default-handler
+        {:not-found (constantly (views/not-found))}))))
 
 (defn server [port]
   (httpkit-server/run-server (handler) {:port port}))
