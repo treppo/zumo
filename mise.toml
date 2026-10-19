@@ -1,5 +1,4 @@
 [tools]
 babashka = "latest"
 clojure = "latest"
-java = "graalvm"
-"cargo:zerostack" = { version = "latest", features = "acp,loop,git-worktree,mcp" }
+java = "graalvm-community-25.0.2"

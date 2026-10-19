@@ -6,3 +6,6 @@ target/
 .env
 .clj-kondo/
 .lsp/
+.superpowers/
+*.sublime-project
+.DS_Store

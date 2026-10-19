@@ -1,42 +1,45 @@
-{:deps {dev.weavejester/cljfmt {:mvn/version "0.13.1"}}
+{:deps {dev.weavejester/cljfmt           {:mvn/version "0.16.6"}
+        io.github.clj-kondo/clj-kondo-bb {:git/tag "v2023.01.20" :git/sha "adfc7df"}}
 
  :tasks
- {dev {:doc "Run in development mode with REPL"
-       :task (shell "clojure -M:dev")}
+ {dev          {:doc  "Run in development mode with REPL"
+                :task (shell "clojure -M:dev")}
 
-  outdated {:doc "Show outdated dependencies"
-            :task (shell "clojure -Sdeps '{:deps {com.github.liquidz/antq {:mvn/version \"2.11.1276\"}}}' -M -m antq.core")}
+  outdated     {:doc  "Show outdated dependencies"
+                :task (shell "clojure -Sdeps '{:deps {com.github.liquidz/antq {:mvn/version \"2.11.1276\"}}}' -M -m antq.core")}
 
-  upgrade {:doc "Upgrade outdated dependencies"
-           :task (shell "clojure -Sdeps '{:deps {com.github.liquidz/antq {:mvn/version \"2.11.1276\"}}}' -M -m antq.core --upgrade --force")}
+  upgrade      {:doc  "Upgrade outdated dependencies"
+                :task (shell "clojure -Sdeps '{:deps {com.github.liquidz/antq {:mvn/version \"2.11.1276\"}}}' -M -m antq.core --upgrade --force")}
 
-  run {:doc "Run the application"
-       :task (shell {:extra-env {"PROFILE" "local"}} "clojure -M:run")
-       :override-builtin true}
-
-  fmt {:doc "Format Clojure source files with cljfmt"
-       :task (shell "bb -f script/cljfmt.clj fix")}
-
-  fmt-check {:doc "Check Clojure source formatting with cljfmt"
-             :task (shell "bb -f script/cljfmt.clj check")}
-
-  test {:doc "Run the tests"
-        :task (shell {:extra-env {"PROFILE" "test"}} "clojure -X:test")
-        :depends [fmt-check]
-        :override-builtin true}
-
-  clean {:doc "Clean build artifacts"
-         :task (do
-                 (fs/delete-tree "target")
-                 (fs/delete-tree ".cpcache"))}
-
-  uberjar {:doc "Build an uberjar (standalone JAR)"
-           :task (shell "clojure -T:build uberjar")
-           :override-builtin true}
-
-  native-image {:doc "Build a GraalVM native binary from the uberjar"
-                :task (shell "clojure -T:build native-image")
+  run          {:doc              "Run the application"
+                :task             (shell {:extra-env {"PROFILE" "local"}} "clojure -M:run")
                 :override-builtin true}
 
-  agent {:doc "Run coding agent"
-         :task (shell "zerostack --provider openrouter --model deepseek/deepseek-v4-flash")}}}
+  format       {:doc "Fix formatting with cljfmt"
+                :requires ([cljfmt.tool :as fmt])
+                :task (fmt/fix {})}
+
+  format-check {:doc "Check formatting with cljfmt"
+                :requires ([cljfmt.tool :as fmt])
+                :task (fmt/check {})}
+
+  lint         {:doc "Run clj-kondo linter"
+                :task (shell "clojure -M:lint --lint src test")}
+
+  test         {:doc              "Run the tests"
+                :task             (shell {:extra-env {"PROFILE" "test"}} "clojure -X:test")
+                :depends          [format-check]
+                :override-builtin true}
+
+  clean        {:doc  "Clean build artifacts"
+                :task (do
+                        (fs/delete-tree "target")
+                        (fs/delete-tree ".cpcache"))}
+
+  uberjar      {:doc              "Build an uberjar (standalone JAR)"
+                :task             (shell "clojure -T:build uberjar")
+                :override-builtin true}
+
+  native-image {:doc              "Build a GraalVM native binary from the uberjar"
+                :task             (shell "clojure -T:build native-image")
+                :override-builtin true}}}
