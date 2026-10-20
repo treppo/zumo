@@ -15,11 +15,11 @@
                 :task             (shell {:extra-env {"PROFILE" "local"}} "clojure -M:run")
                 :override-builtin true}
 
-  format       {:doc "Fix formatting with cljfmt"
+  format       {:doc "Fix formatting"
                 :requires ([cljfmt.tool :as fmt])
                 :task (fmt/fix {})}
 
-  format-check {:doc "Check formatting with cljfmt"
+  format-check {:doc "Check formatting"
                 :requires ([cljfmt.tool :as fmt])
                 :task (fmt/check {})}
 
